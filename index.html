@@ -1,66 +1,1209 @@
-<!doctype html><html lang="fa" dir="rtl"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>برای ستایش ❤️</title>
-<style>@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700;800&display=swap');*{box-sizing:border-box}body{margin:0;font-family:Vazirmatn;background:linear-gradient(135deg,#ffd6e7,#fff1f7,#ffd0e4);color:#76264d}.wrap{min-height:100vh;display:grid;place-items:center;padding:20px}.card{width:min(560px,100%);padding:30px 24px;text-align:center;background:#ffffffc9;backdrop-filter:blur(15px);border-radius:32px;box-shadow:0 20px 60px #b83f7028}.step{display:none}.step.on{display:block}.heart{font-size:55px}h1{color:#b62f68}h2{line-height:1.9}p{line-height:2}.bar{height:7px;background:#ffe0eb;border-radius:20px;margin-bottom:22px}.bar i{display:block;height:100%;width:0;background:#e94283;border-radius:20px;transition:.3s}.btn{border:0;border-radius:17px;padding:13px 20px;margin:6px;background:#e94283;color:#fff;font:700 15px Vazirmatn;cursor:pointer}.btn.alt{background:#fff;color:#b62f68;border:2px solid #ffc5d9}.no{opacity:.4;cursor:not-allowed}input{width:100%;padding:14px;border-radius:15px;border:2px solid #ffd0e1;background:#fffafd;font:15px Vazirmatn;color:#76264d;margin:7px 0 13px}.choices{display:flex;flex-wrap:wrap;justify-content:center}.summary{background:#fff5f9;border-radius:18px;padding:13px;text-align:right;line-height:2}.cd{display:grid;grid-template-columns:repeat(4,1fr);gap:7px}.t{background:white;border-radius:16px;padding:10px}.t b{display:block;font-size:24px;color:#c52e6d}.small{font-size:12px;color:#a45c7b}.hide{display:none!important}.musicGate{position:fixed;inset:0;z-index:9999;display:grid;place-items:center;padding:20px;background:linear-gradient(135deg,#ffd6e7f5,#fff1f7f5);backdrop-filter:blur(12px)}
-.musicBox{width:min(460px,100%);padding:34px 24px;text-align:center;background:#ffffffee;border-radius:30px;box-shadow:0 20px 70px #b83f7030}
-.musicEmoji{font-size:64px;margin-bottom:8px}.musicBox h2{margin:8px 0}.musicBox p{margin:8px 0 18px}
-.musicGate.hideGate{display:none}
-.musicMini{position:fixed;left:14px;bottom:14px;z-index:1000;border:0;border-radius:999px;padding:10px 14px;background:#fff;color:#b62f68;box-shadow:0 8px 25px #b83f7030;font-family:inherit;cursor:pointer}
-</style>
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>برای ستایش ❤️</title>
 
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700;800&display=swap');
+
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  font-family:Vazirmatn,Arial,sans-serif;
+  background:linear-gradient(135deg,#ffd6e7,#fff1f7,#ffd0e4);
+  color:#76264d;
+  min-height:100vh;
+}
+
+.wrap{
+  min-height:100vh;
+  display:grid;
+  place-items:center;
+  padding:20px;
+}
+
+.card{
+  width:min(560px,100%);
+  padding:30px 24px;
+  text-align:center;
+  background:#ffffffd9;
+  backdrop-filter:blur(15px);
+  border-radius:32px;
+  box-shadow:0 20px 60px #b83f7028;
+}
+
+.step{display:none}
+.step.on{display:block}
+
+.heart{
+  font-size:55px;
+  animation:heartBeat 1.5s infinite;
+}
+
+@keyframes heartBeat{
+  0%,100%{transform:scale(1)}
+  50%{transform:scale(1.12)}
+}
+
+h1{color:#b62f68}
+h2{line-height:1.9}
+p{line-height:2}
+
+.bar{
+  height:7px;
+  background:#ffe0eb;
+  border-radius:20px;
+  margin-bottom:22px;
+  overflow:hidden;
+}
+
+.bar i{
+  display:block;
+  height:100%;
+  width:0;
+  background:#e94283;
+  border-radius:20px;
+  transition:.3s;
+}
+
+.btn{
+  border:0;
+  border-radius:17px;
+  padding:13px 20px;
+  margin:6px;
+  background:#e94283;
+  color:#fff;
+  font:700 15px Vazirmatn;
+  cursor:pointer;
+  transition:.2s;
+}
+
+.btn:hover{
+  transform:translateY(-2px);
+}
+
+.btn.alt{
+  background:#fff;
+  color:#b62f68;
+  border:2px solid #ffc5d9;
+}
+
+.no{
+  opacity:.4;
+  cursor:not-allowed;
+}
+
+input{
+  width:100%;
+  padding:14px;
+  border-radius:15px;
+  border:2px solid #ffd0e1;
+  background:#fffafd;
+  font:15px Vazirmatn;
+  color:#76264d;
+  margin:7px 0 13px;
+  outline:none;
+}
+
+input:focus{
+  border-color:#e94283;
+}
+
+.choices{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+}
+
+.summary{
+  background:#fff5f9;
+  border-radius:18px;
+  padding:13px;
+  text-align:right;
+  line-height:2;
+}
+
+.cd{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:7px;
+}
+
+.t{
+  background:white;
+  border-radius:16px;
+  padding:10px;
+}
+
+.t b{
+  display:block;
+  font-size:24px;
+  color:#c52e6d;
+}
+
+.small{
+  font-size:12px;
+  color:#a45c7b;
+}
+
+.hide{
+  display:none!important;
+}
+
+.musicGate{
+  position:fixed;
+  inset:0;
+  z-index:9999;
+  display:grid;
+  place-items:center;
+  padding:20px;
+  background:linear-gradient(135deg,#ffd6e7f5,#fff1f7f5);
+  backdrop-filter:blur(12px);
+}
+
+.musicGate.hideGate{
+  display:none;
+}
+
+.musicBox{
+  width:min(460px,100%);
+  padding:34px 24px;
+  text-align:center;
+  background:#ffffffee;
+  border-radius:30px;
+  box-shadow:0 20px 70px #b83f7030;
+}
+
+.musicEmoji{
+  font-size:64px;
+}
+
+.musicMini{
+  position:fixed;
+  left:14px;
+  bottom:14px;
+  z-index:1000;
+  border:0;
+  border-radius:999px;
+  padding:10px 14px;
+  background:#fff;
+  color:#b62f68;
+  box-shadow:0 8px 25px #b83f7030;
+  font-family:inherit;
+  cursor:pointer;
+}
+</style>
+</head>
+
+<body>
+
+<!-- MUSIC GATE -->
 <div id="musicGate" class="musicGate">
   <div class="musicBox">
     <div class="musicEmoji">🎧❤️</div>
+
     <h2>یه آهنگ برات دارم، ستایش...</h2>
-    <p>قبل از اینکه شروع کنیم، بزن روش تا آهنگمون پخش بشه 🎶</p>
-    <button class="btn" onclick="startExperience()">شروع کنیم؟ 🎵❤️</button>
-    <p class="small">آهنگ در طول فرم ادامه پیدا می‌کنه.</p>
+
+    <p>
+      قبل از اینکه شروع کنیم،
+      بزن روش تا آهنگمون پخش بشه 🎶
+    </p>
+
+    <button class="btn" onclick="startExperience()">
+      شروع کنیم؟ 🎵❤️
+    </button>
+
+    <p class="small">
+      آهنگ در طول فرم ادامه پیدا می‌کنه.
+    </p>
   </div>
 </div>
+
+<!-- MUSIC -->
 <audio id="dateMusic" preload="auto" loop>
   <source src="anta-ghalb.mp3" type="audio/mpeg">
 </audio>
-<div class="wrap"><main class="card"><div class="bar"><i id="bar"></i></div>
-<section class="step on" id="s0"><div class="heart">💗</div><h1>ستایش جان...</h1><h2>یه سورپرایز کوچولو برات دارم 🌸</h2><p>چندتا سؤال کوچولو داریم و آخرش یه اتفاق قشنگ منتظرمونه... 🥹❤️</p><button class="btn" onclick="go(1)">بزن بریم 💕</button></section>
-<section class="step" id="s1"><div class="heart">🥹</div><h2>ستایش، اولین دیت رو حاضری با من بیای؟ ❤️</h2><button class="btn" onclick="go(2)">آره، معلومه 😍</button><button class="btn no" onclick="return false">نه 🙈 🔒</button><p class="small">این یکی انگار قفل شده... 😌</p></section>
-<section class="step" id="s2"><div class="heart">📱</div><h2>عزیزم، وقتشه شمارتو بدی 📱❤️</h2><p>شماره‌ت فقط برای هماهنگی قرار گرفته می‌شه.</p><input id="phone" type="tel" inputmode="tel" placeholder="مثلاً 09xxxxxxxxx"><button class="btn" onclick="phoneNext()">ادامه 💗</button></section>
-<section class="step" id="s3"><div class="heart">📅</div><h2>چه تاریخی رو برای اولین دیت‌مون دوست داری؟ 🌷</h2><input id="date" type="date"><button class="btn" onclick="dateNext()">ادامه 💗</button></section>
-<section class="step" id="s4"><div class="heart">🕐</div><h2>حالا ساعتش رو هم خودت انتخاب کن ⏰💕</h2><input id="time" type="time"><button class="btn" onclick="timeNext()">ثبت ساعت ❤️</button></section>
-<section class="step" id="s5"><div class="heart">🎵</div><h2>برای مسیر، چه آهنگی بیشتر به دلت می‌شینه؟ 🎶</h2><input id="song" placeholder="اسم آهنگ یا خواننده..."><button class="btn" onclick="go(6)">انتخاب شد 🎶</button><button class="btn alt" onclick="go(6)">خودت انتخاب کن 😉</button></section>
-<section class="step" id="s6"><div class="heart">🍕</div><h2>بعدش دلم می‌خواد یه چیزی با هم بخوریم 😋</h2><div class="choices"><button class="btn" onclick="food='پیتزا';data.food=food;go(7)">🍕 پیتزا</button><button class="btn" onclick="food='برگر';data.food=food;go(7)">🍔 برگر</button><button class="btn" onclick="food='پاستا';data.food=food;go(7)">🍝 پاستا</button><button class="btn" onclick="food='سورپرایزم کن';data.food=food;go(7)">🥰 سورپرایزم کن</button></div></section>
-<section class="step" id="s7"><div class="heart">🌹</div><h2>برای اولین دیت، گل هم می‌خوای؟ 🌹</h2><button class="btn" onclick="go(8)">آره 🥰</button><button class="btn alt" onclick="go(8)">هرچی خودت دوست داری ❤️</button></section>
-<section class="step" id="s8"><div class="heart">🥹❤️</div><h2>چقدر برای دیت‌مون هیجان داری؟</h2><input id="ex" type="range" min="0" max="100" value="85"><b id="exv">85%</b><p><button class="btn" onclick="finish()">خب... بریم سراغ قرارمون 😍</button></p></section>
-<section class="step" id="s9"><div class="heart">💌</div><h1>قرارمون ثبت شد، ستایش! 💕</h1><div class="summary">📱 شماره: <b id="sp"></b><br>📅 تاریخ: <b id="sd"></b><br>🕐 ساعت: <b id="st"></b><br>🎵 آهنگ: <b id="ss"></b><br>🍽️ انتخاب: <b id="sf"></b></div><p>🚗 خودم میام دنبالت؛<br>تو فقط آماده باش که یه روز قشنگ رو با هم بسازیم ❤️</p><h2>⏳ تا قرارمون...</h2><div class="cd" id="cd"><div class="t"><b id="d">00</b><span>روز</span></div><div class="t"><b id="h">00</b><span>ساعت</span></div><div class="t"><b id="m">00</b><span>دقیقه</span></div><div class="t"><b id="s">00</b><span>ثانیه</span></div></div><h2 id="today" class="hide">🎉❤️ امروز روز موعوده! ❤️🎉</h2><p class="small" id="save">در حال ثبت پاسخ‌ها...</p></section>
-</main></div>
-<button id="musicMini" class="musicMini" onclick="toggleMusic()">🎵 پخش</button>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script>
-const SUPABASE_URL="https://jhbumkqemvvsjiyqiith.supabase.co",SUPABASE_ANON_KEY="sb_publishable_UPr3S7SXyJOuvYggJ6iA2Q_wF_b_Qkc";
-const music=document.getElementById("dateMusic"),musicGate=document.getElementById("musicGate"),musicMini=document.getElementById("musicMini");
-function startExperience(){music.volume=.72;music.play().then(()=>{musicGate.classList.add("hideGate");musicMini.textContent="⏸️ توقف"}).catch(()=>{musicGate.classList.add("hideGate");musicMini.textContent="🎵 پخش"})}
-function toggleMusic(){if(music.paused){music.play().then(()=>musicMini.textContent="⏸️ توقف").catch(()=>{});}else{music.pause();musicMini.textContent="🎵 پخش"}}
-const db=(SUPABASE_URL.startsWith("http")&&window.supabase)?window.supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY):null;
-let food="",target;let data=JSON.parse(localStorage.getItem("setayeshDate")||"{}");
-data.id=data.id||crypto.randomUUID();
-function restoreForm(){
-  if(data.phone) phone.value=data.phone;
-  if(data.date) date.value=data.date;
-  if(data.time) time.value=data.time;
-  if(data.song) song.value=data.song;
-  if(Number.isFinite(data.excitement)){ex.value=data.excitement;exv.textContent=data.excitement+"%";}
-  if(data.food) food=data.food;
-  if(data.step && data.step>0 && data.step<9) go(data.step);
+
+<div class="wrap">
+
+<main class="card">
+
+<div class="bar">
+  <i id="bar"></i>
+</div>
+
+<!-- STEP 0 -->
+<section class="step on" id="s0">
+
+  <div class="heart">💗</div>
+
+  <h1>ستایش جان...</h1>
+
+  <h2>
+    یه سورپرایز کوچولو برات دارم 🌸
+  </h2>
+
+  <p>
+    چندتا سؤال کوچولو داریم و آخرش
+    یه اتفاق قشنگ منتظرمونه... 🥹❤️
+  </p>
+
+  <button class="btn" onclick="go(1)">
+    بزن بریم 💕
+  </button>
+
+</section>
+
+
+<!-- STEP 1 -->
+<section class="step" id="s1">
+
+  <div class="heart">🥹</div>
+
+  <h2>
+    ستایش، اولین دیت رو حاضری با من بیای؟ ❤️
+  </h2>
+
+  <button class="btn" onclick="go(2)">
+    آره، معلومه 😍
+  </button>
+
+  <button class="btn no" onclick="return false">
+    نه 🙈 🔒
+  </button>
+
+  <p class="small">
+    این یکی انگار قفل شده... 😌
+  </p>
+
+</section>
+
+
+<!-- STEP 2 -->
+<section class="step" id="s2">
+
+  <div class="heart">📱</div>
+
+  <h2>
+    عزیزم، وقتشه شمارتو بدی 📱❤️
+  </h2>
+
+  <p>
+    شماره‌ت فقط برای هماهنگی قرار گرفته می‌شه.
+  </p>
+
+  <input
+    id="phone"
+    type="tel"
+    inputmode="tel"
+    placeholder="مثلاً 09xxxxxxxxx"
+  >
+
+  <button class="btn" onclick="phoneNext()">
+    ادامه 💗
+  </button>
+
+</section>
+
+
+<!-- STEP 3 -->
+<section class="step" id="s3">
+
+  <div class="heart">📅</div>
+
+  <h2>
+    چه تاریخی رو برای اولین دیت‌مون دوست داری؟ 🌷
+  </h2>
+
+  <input id="date" type="date">
+
+  <button class="btn" onclick="dateNext()">
+    ادامه 💗
+  </button>
+
+</section>
+
+
+<!-- STEP 4 -->
+<section class="step" id="s4">
+
+  <div class="heart">🕐</div>
+
+  <h2>
+    حالا ساعتش رو هم خودت انتخاب کن ⏰💕
+  </h2>
+
+  <input id="time" type="time">
+
+  <button class="btn" onclick="timeNext()">
+    ثبت ساعت ❤️
+  </button>
+
+</section>
+
+
+<!-- STEP 5 -->
+<section class="step" id="s5">
+
+  <div class="heart">🎵</div>
+
+  <h2>
+    برای مسیر، چه آهنگی بیشتر به دلت می‌شینه؟ 🎶
+  </h2>
+
+  <input
+    id="song"
+    placeholder="اسم آهنگ یا خواننده..."
+  >
+
+  <button class="btn" onclick="songNext()">
+    انتخاب شد 🎶
+  </button>
+
+  <button class="btn alt" onclick="songNext(true)">
+    خودت انتخاب کن 😉
+  </button>
+
+</section>
+
+
+<!-- STEP 6 -->
+<section class="step" id="s6">
+
+  <div class="heart">🍕</div>
+
+  <h2>
+    بعدش دلم می‌خواد یه چیزی با هم بخوریم 😋
+  </h2>
+
+  <div class="choices">
+
+    <button class="btn" onclick="chooseFood('پیتزا')">
+      🍕 پیتزا
+    </button>
+
+    <button class="btn" onclick="chooseFood('برگر')">
+      🍔 برگر
+    </button>
+
+    <button class="btn" onclick="chooseFood('پاستا')">
+      🍝 پاستا
+    </button>
+
+    <button class="btn" onclick="chooseFood('سورپرایزم کن')">
+      🥰 سورپرایزم کن
+    </button>
+
+  </div>
+
+</section>
+
+
+<!-- STEP 7 -->
+<section class="step" id="s7">
+
+  <div class="heart">🌹</div>
+
+  <h2>
+    برای اولین دیت، گل هم می‌خوای؟ 🌹
+  </h2>
+
+  <button class="btn" onclick="chooseFlower('آره 🥰')">
+    آره 🥰
+  </button>
+
+  <button class="btn alt" onclick="chooseFlower('هرچی خودت دوست داری ❤️')">
+    هرچی خودت دوست داری ❤️
+  </button>
+
+</section>
+
+
+<!-- STEP 8 -->
+<section class="step" id="s8">
+
+  <div class="heart">🥹❤️</div>
+
+  <h2>
+    چقدر برای دیت‌مون هیجان داری؟
+  </h2>
+
+  <input
+    id="ex"
+    type="range"
+    min="0"
+    max="100"
+    value="85"
+  >
+
+  <b id="exv">85%</b>
+
+  <p>
+
+    <button class="btn" onclick="finish()">
+      خب... بریم سراغ قرارمون 😍
+    </button>
+
+  </p>
+
+</section>
+
+
+<!-- STEP 9 -->
+<section class="step" id="s9">
+
+  <div class="heart">💌</div>
+
+  <h1>
+    قرارمون ثبت شد، ستایش! 💕
+  </h1>
+
+  <div class="summary">
+
+    📱 شماره:
+    <b id="sp"></b>
+
+    <br>
+
+    📅 تاریخ:
+    <b id="sd"></b>
+
+    <br>
+
+    🕐 ساعت:
+    <b id="st"></b>
+
+    <br>
+
+    🎵 آهنگ:
+    <b id="ss"></b>
+
+    <br>
+
+    🍽️ انتخاب:
+    <b id="sf"></b>
+
+    <br>
+
+    🌹 گل:
+    <b id="sflower"></b>
+
+  </div>
+
+  <p>
+    🚗 خودم میام دنبالت؛
+    <br>
+    تو فقط آماده باش که یه روز قشنگ رو با هم بسازیم ❤️
+  </p>
+
+  <h2>
+    ⏳ تا قرارمون...
+  </h2>
+
+  <div class="cd" id="cd">
+
+    <div class="t">
+      <b id="d">00</b>
+      <span>روز</span>
+    </div>
+
+    <div class="t">
+      <b id="h">00</b>
+      <span>ساعت</span>
+    </div>
+
+    <div class="t">
+      <b id="m">00</b>
+      <span>دقیقه</span>
+    </div>
+
+    <div class="t">
+      <b id="s">00</b>
+      <span>ثانیه</span>
+    </div>
+
+  </div>
+
+  <h2 id="today" class="hide">
+    🎉❤️ امروز روز موعوده! ❤️🎉
+  </h2>
+
+  <p class="small" id="save">
+    در حال ثبت پاسخ‌ها...
+  </p>
+
+</section>
+
+</main>
+</div>
+
+<button
+  id="musicMini"
+  class="musicMini"
+  onclick="toggleMusic()"
+>
+  🎵 پخش
+</button>
+
+
+<!-- SUPABASE -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+
+/* =========================
+   SUPABASE
+========================= */
+
+const SUPABASE_URL =
+"https://jhbumkqemvvsjiyqiith.supabase.co";
+
+const SUPABASE_ANON_KEY =
+"sb_publishable_UPr3S7SXyJOuvYggJ6iA2Q_wF_b_Qkc";
+
+const db =
+window.supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_ANON_KEY
+);
+
+
+/* =========================
+   ELEMENTS
+========================= */
+
+const music =
+document.getElementById("dateMusic");
+
+const musicGate =
+document.getElementById("musicGate");
+
+const musicMini =
+document.getElementById("musicMini");
+
+const phone =
+document.getElementById("phone");
+
+const date =
+document.getElementById("date");
+
+const time =
+document.getElementById("time");
+
+const song =
+document.getElementById("song");
+
+const ex =
+document.getElementById("ex");
+
+const exv =
+document.getElementById("exv");
+
+
+/* =========================
+   DATA
+========================= */
+
+let data = {};
+
+try{
+  data =
+    JSON.parse(
+      localStorage.getItem("setayeshDate") || "{}"
+    );
+}catch(e){
+  data = {};
 }
-window.addEventListener("load",restoreForm);
-function go(n){document.querySelectorAll(".step").forEach(x=>x.classList.remove("on"));document.getElementById("s"+n).classList.add("on");document.getElementById("bar").style.width=(n/9*100)+"%";data.step=n;localStorage.setItem("setayeshDate",JSON.stringify(data))}
-function phoneNext(){let v=phone.value.trim();if(!/^[+]?[0-9۰-۹\s-]{8,16}$/.test(v)){alert("لطفاً شماره موبایل رو درست وارد کن ❤️");return}data.phone=v;go(3)}function dateNext(){if(!date.value){alert("یه تاریخ قشنگ انتخاب کن 🌷");return}data.date=date.value;go(4)}function timeNext(){if(!time.value){alert("ساعت قرارمون رو انتخاب کن ❤️");return}data.time=time.value;go(5)}
-ex.oninput=()=>exv.textContent=ex.value+"%";
-async function finish(){data.song=song.value.trim()||"انتخابش با خودمون 🎶";data.excitement=+ex.value;data.created_at=new Date().toISOString();localStorage.setItem("setayeshDate",JSON.stringify(data));sp.textContent=data.phone;sd.textContent=new Date(data.date+"T00:00").toLocaleDateString("fa-IR");st.textContent=data.time;ss.textContent=data.song;sf.textContent=food||"یه انتخاب خوشمزه 😋";target=new Date(data.date+"T"+data.time);go(9);tick();setInterval(tick,1000);
-db.from("date_responses").insert({
-  id: data.id,
-  phone: data.phone,
-  date: data.date,
-  time: data.time,
-  song: data.song,
-  food: food,
-  excitement: data.excitement
-});save.textContent=error?"ذخیره آنلاین ناموفق بود؛ اطلاعات روی همین دستگاه باقی ماند ❤️":"پاسخ‌هات با موفقیت ثبت شد ❤️"}else save.textContent="برای ذخیره آنلاین، Supabase را طبق راهنما وصل کن ❤️"}
-function tick(){let x=target-new Date();if(x<=0){cd.classList.add("hide");today.classList.remove("hide");return}let days=Math.floor(x/864e5);x%=864e5;let hrs=Math.floor(x/36e5);x%=36e5;let min=Math.floor(x/6e4);x%=6e4;let sec=Math.floor(x/1e3);d.textContent=String(days).padStart(2,"0");h.textContent=String(hrs).padStart(2,"0");m.textContent=String(min).padStart(2,"0");s.textContent=String(sec).padStart(2,"0")}
-</script></html>
+
+data.id =
+  data.id ||
+  (
+    crypto.randomUUID
+      ? crypto.randomUUID()
+      : Date.now()+"-"+Math.random()
+  );
+
+let food =
+  data.food || "";
+
+let flower =
+  data.flower || "";
+
+let target = null;
+
+let timerStarted = false;
+
+
+/* =========================
+   SAVE LOCAL
+========================= */
+
+function saveLocal(){
+
+  localStorage.setItem(
+    "setayeshDate",
+    JSON.stringify(data)
+  );
+
+}
+
+
+/* =========================
+   MUSIC
+========================= */
+
+function startExperience(){
+
+  music.volume = 0.72;
+
+  const playPromise =
+    music.play();
+
+  if(playPromise){
+
+    playPromise
+      .then(function(){
+
+        musicGate.classList.add("hideGate");
+
+        musicMini.textContent =
+          "⏸️ توقف";
+
+      })
+      .catch(function(){
+
+        musicGate.classList.add("hideGate");
+
+        musicMini.textContent =
+          "🎵 پخش";
+
+      });
+
+  }else{
+
+    musicGate.classList.add("hideGate");
+
+  }
+
+}
+
+
+function toggleMusic(){
+
+  if(music.paused){
+
+    music.play()
+      .then(function(){
+
+        musicMini.textContent =
+          "⏸️ توقف";
+
+      })
+      .catch(function(){});
+
+  }else{
+
+    music.pause();
+
+    musicMini.textContent =
+      "🎵 پخش";
+
+  }
+
+}
+
+
+/* =========================
+   NAVIGATION
+========================= */
+
+function go(n){
+
+  document
+    .querySelectorAll(".step")
+    .forEach(function(x){
+
+      x.classList.remove("on");
+
+    });
+
+  const next =
+    document.getElementById("s"+n);
+
+  if(!next) return;
+
+  next.classList.add("on");
+
+  document
+    .getElementById("bar")
+    .style.width =
+      ((n / 9) * 100) + "%";
+
+  data.step = n;
+
+  saveLocal();
+
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
+
+}
+
+
+/* =========================
+   RESTORE
+========================= */
+
+function restoreForm(){
+
+  if(data.phone)
+    phone.value = data.phone;
+
+  if(data.date)
+    date.value = data.date;
+
+  if(data.time)
+    time.value = data.time;
+
+  if(data.song)
+    song.value = data.song;
+
+  if(
+    Number.isFinite(
+      Number(data.excitement)
+    )
+  ){
+
+    ex.value =
+      Number(data.excitement);
+
+    exv.textContent =
+      Number(data.excitement) + "%";
+
+  }
+
+  if(data.food)
+    food = data.food;
+
+  if(data.flower)
+    flower = data.flower;
+
+}
+
+
+/* =========================
+   FORM
+========================= */
+
+function phoneNext(){
+
+  const value =
+    phone.value.trim();
+
+  if(
+    !/^[+]?[0-9۰-۹\s-]{8,16}$/.test(value)
+  ){
+
+    alert(
+      "لطفاً شماره موبایل رو درست وارد کن ❤️"
+    );
+
+    return;
+
+  }
+
+  data.phone = value;
+
+  saveLocal();
+
+  go(3);
+
+}
+
+
+function dateNext(){
+
+  if(!date.value){
+
+    alert(
+      "یه تاریخ قشنگ انتخاب کن 🌷"
+    );
+
+    return;
+
+  }
+
+  data.date =
+    date.value;
+
+  saveLocal();
+
+  go(4);
+
+}
+
+
+function timeNext(){
+
+  if(!time.value){
+
+    alert(
+      "ساعت قرارمون رو انتخاب کن ❤️"
+    );
+
+    return;
+
+  }
+
+  data.time =
+    time.value;
+
+  saveLocal();
+
+  go(5);
+
+}
+
+
+function songNext(ownChoice){
+
+  if(ownChoice){
+
+    data.song =
+      "انتخابش با خودمون 🎶";
+
+  }else{
+
+    data.song =
+      song.value.trim() ||
+      "انتخابش با خودمون 🎶";
+
+  }
+
+  song.value =
+    data.song;
+
+  saveLocal();
+
+  go(6);
+
+}
+
+
+function chooseFood(value){
+
+  food = value;
+
+  data.food =
+    value;
+
+  saveLocal();
+
+  go(7);
+
+}
+
+
+function chooseFlower(value){
+
+  flower = value;
+
+  data.flower =
+    value;
+
+  saveLocal();
+
+  go(8);
+
+}
+
+
+/* =========================
+   SLIDER
+========================= */
+
+ex.oninput =
+function(){
+
+  exv.textContent =
+    ex.value + "%";
+
+};
+
+
+/* =========================
+   FINISH
+========================= */
+
+async function finish(){
+
+  if(!data.phone){
+
+    alert(
+      "اول شماره موبایل رو وارد کن ❤️"
+    );
+
+    go(2);
+
+    return;
+
+  }
+
+  if(!data.date){
+
+    alert(
+      "اول تاریخ قرارمون رو انتخاب کن 🌷"
+    );
+
+    go(3);
+
+    return;
+
+  }
+
+  if(!data.time){
+
+    alert(
+      "اول ساعت قرارمون رو انتخاب کن ⏰"
+    );
+
+    go(4);
+
+    return;
+
+  }
+
+
+  data.song =
+    song.value.trim() ||
+    data.song ||
+    "انتخابش با خودمون 🎶";
+
+  data.excitement =
+    Number(ex.value);
+
+  data.food =
+    food || "یه انتخاب خوشمزه 😋";
+
+  data.flower =
+    flower || "سورپرایز 🌹";
+
+
+  saveLocal();
+
+
+  /* SHOW RESULT */
+
+  document.getElementById("sp").textContent =
+    data.phone;
+
+  document.getElementById("sd").textContent =
+    new Date(
+      data.date + "T00:00:00"
+    ).toLocaleDateString("fa-IR");
+
+  document.getElementById("st").textContent =
+    data.time;
+
+  document.getElementById("ss").textContent =
+    data.song;
+
+  document.getElementById("sf").textContent =
+    data.food;
+
+  document.getElementById("sflower").textContent =
+    data.flower;
+
+
+  target =
+    new Date(
+      data.date + "T" + data.time
+    );
+
+
+  go(9);
+
+
+  if(!timerStarted){
+
+    timerStarted = true;
+
+    tick();
+
+    setInterval(
+      tick,
+      1000
+    );
+
+  }
+
+
+  /* =========================
+     SUPABASE INSERT
+  ========================= */
+
+  const save =
+    document.getElementById("save");
+
+  save.textContent =
+    "در حال ثبت پاسخ‌ها...";
+
+
+  const payload = {
+
+    id:data.id,
+
+    phone:data.phone,
+
+    date:data.date,
+
+    time:data.time,
+
+    song:data.song,
+
+    food:data.food,
+
+    excitement:data.excitement
+
+  };
+
+
+  try{
+
+    const result =
+      await db
+        .from("date_responses")
+        .insert(payload);
+
+
+    if(result.error){
+
+      console.error(
+        "Supabase error:",
+        result.error
+      );
+
+      save.textContent =
+        "ذخیره آنلاین ناموفق بود؛ اطلاعات روی همین دستگاه باقی ماند ❤️";
+
+    }else{
+
+      save.textContent =
+        "پاسخ‌هات با موفقیت ثبت شد ❤️";
+
+    }
+
+  }catch(error){
+
+    console.error(
+      "Save error:",
+      error
+    );
+
+    save.textContent =
+      "پاسخ‌هات روی همین دستگاه ذخیره شد ❤️";
+
+  }
+
+}
+
+
+/* =========================
+   COUNTDOWN
+========================= */
+
+function tick(){
+
+  if(!target)
+    return;
+
+
+  let x =
+    target - new Date();
+
+
+  if(x <= 0){
+
+    document
+      .getElementById("cd")
+      .classList.add("hide");
+
+    document
+      .getElementById("today")
+      .classList.remove("hide");
+
+    return;
+
+  }
+
+
+  const days =
+    Math.floor(
+      x / 86400000
+    );
+
+  x %= 86400000;
+
+
+  const hrs =
+    Math.floor(
+      x / 3600000
+    );
+
+  x %= 3600000;
+
+
+  const min =
+    Math.floor(
+      x / 60000
+    );
+
+  x %= 60000;
+
+
+  const sec =
+    Math.floor(
+      x / 1000
+    );
+
+
+  document.getElementById("d")
+    .textContent =
+      String(days).padStart(2,"0");
+
+  document.getElementById("h")
+    .textContent =
+      String(hrs).padStart(2,"0");
+
+  document.getElementById("m")
+    .textContent =
+      String(min).padStart(2,"0");
+
+  document.getElementById("s")
+    .textContent =
+      String(sec).padStart(2,"0");
+
+}
+
+
+/* =========================
+   INIT
+========================= */
+
+window.addEventListener(
+  "load",
+  function(){
+
+    restoreForm();
+
+  }
+);
+
+</script>
+
+</body>
+</html>
