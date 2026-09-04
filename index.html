@@ -53,24 +53,6 @@ function go(n){document.querySelectorAll(".step").forEach(x=>x.classList.remove(
 function phoneNext(){let v=phone.value.trim();if(!/^[+]?[0-9۰-۹\s-]{8,16}$/.test(v)){alert("لطفاً شماره موبایل رو درست وارد کن ❤️");return}data.phone=v;go(3)}function dateNext(){if(!date.value){alert("یه تاریخ قشنگ انتخاب کن 🌷");return}data.date=date.value;go(4)}function timeNext(){if(!time.value){alert("ساعت قرارمون رو انتخاب کن ❤️");return}data.time=time.value;go(5)}
 ex.oninput=()=>exv.textContent=ex.value+"%";
 async function finish(){data.song=song.value.trim()||"انتخابش با خودمون 🎶";data.excitement=+ex.value;data.created_at=new Date().toISOString();localStorage.setItem("setayeshDate",JSON.stringify(data));sp.textContent=data.phone;sd.textContent=new Date(data.date+"T00:00").toLocaleDateString("fa-IR");st.textContent=data.time;ss.textContent=data.song;sf.textContent=food||"یه انتخاب خوشمزه 😋";target=new Date(data.date+"T"+data.time);go(9);tick();setInterval(tick,1000);
-if(db){
-  let {error}=await db.from("date_responses").insert({
-    id:data.id,
-    phone:data.phone,
-    date:data.date,
-    time:data.time,
-    song:data.song,
-    food:food,
-    excitement:data.excitement
-  });
-
-  save.textContent=error
-    ?"ذخیره آنلاین ناموفق بود؛ اطلاعات روی همین دستگاه باقی ماند ❤️"
-    :"پاسخ‌هات با موفقیت ثبت شد ❤️";
-
-  if(error) console.error("Supabase save error:",error);
-}else{
-  save.textContent="برای ذخیره آنلاین، Supabase را طبق راهنما وصل کن ❤️";
-  }
+if(db){let {error}=await db.from("date_responses").insert({id:data.id,phone:data.phone,date:data.date,time:data.time,song:data.song,food:food,excitement:data.excitement});save.textContent=error?"ذخیره آنلاین ناموفق بود؛ اطلاعات روی همین دستگاه باقی ماند ❤️":"پاسخ‌هات با موفقیت ثبت شد ❤️";if(error) console.error("Supabase save error:",error);}else{save.textContent="برای ذخیره آنلاین، Supabase را طبق راهنما وصل کن ❤️";}
 function tick(){let x=target-new Date();if(x<=0){cd.classList.add("hide");today.classList.remove("hide");return}let days=Math.floor(x/864e5);x%=864e5;let hrs=Math.floor(x/36e5);x%=36e5;let min=Math.floor(x/6e4);x%=6e4;let sec=Math.floor(x/1e3);d.textContent=String(days).padStart(2,"0");h.textContent=String(hrs).padStart(2,"0");m.textContent=String(min).padStart(2,"0");s.textContent=String(sec).padStart(2,"0")}
 </script></html>
