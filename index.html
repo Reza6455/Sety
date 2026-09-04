@@ -5,6 +5,19 @@
 .musicGate.hideGate{display:none}
 .musicMini{position:fixed;left:14px;bottom:14px;z-index:1000;border:0;border-radius:999px;padding:10px 14px;background:#fff;color:#b62f68;box-shadow:0 8px 25px #b83f7030;font-family:inherit;cursor:pointer}
 </style>
+
+<div id="musicGate" class="musicGate">
+  <div class="musicBox">
+    <div class="musicEmoji">🎧❤️</div>
+    <h2>یه آهنگ برات دارم، ستایش...</h2>
+    <p>قبل از اینکه شروع کنیم، بزن روش تا آهنگمون پخش بشه 🎶</p>
+    <button class="btn" onclick="startExperience()">شروع کنیم؟ 🎵❤️</button>
+    <p class="small">آهنگ در طول فرم ادامه پیدا می‌کنه.</p>
+  </div>
+</div>
+<audio id="dateMusic" preload="auto" loop>
+  <source src="anta-ghalb.mp3" type="audio/mpeg">
+</audio>
 <div class="wrap"><main class="card"><div class="bar"><i id="bar"></i></div>
 <section class="step on" id="s0"><div class="heart">💗</div><h1>ستایش جان...</h1><h2>یه سورپرایز کوچولو برات دارم 🌸</h2><p>چندتا سؤال کوچولو داریم و آخرش یه اتفاق قشنگ منتظرمونه... 🥹❤️</p><button class="btn" onclick="go(1)">بزن بریم 💕</button></section>
 <section class="step" id="s1"><div class="heart">🥹</div><h2>ستایش، اولین دیت رو حاضری با من بیای؟ ❤️</h2><button class="btn" onclick="go(2)">آره، معلومه 😍</button><button class="btn no" onclick="return false">نه 🙈 🔒</button><p class="small">این یکی انگار قفل شده... 😌</p></section>
