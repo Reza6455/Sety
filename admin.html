@@ -1,507 +1,989 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="fa" dir="rtl">
-
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta charset="utf-8">
+  <title>پنل خصوصی نتایج ستایش ❤️</title>
 
-<meta
-  name="viewport"
-  content="width=device-width,initial-scale=1"
->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-<title>پنل نتایج ❤️</title>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-<style>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
 
-body{
-  margin:0;
-  font-family:Arial,sans-serif;
-  background:#fff0f6;
-  color:#702647;
-}
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Vazirmatn", sans-serif;
+      background:
+        radial-gradient(circle at top right, #ffd6e7 0%, transparent 35%),
+        radial-gradient(circle at bottom left, #ffeaf3 0%, transparent 40%),
+        linear-gradient(135deg, #fff5f9, #ffe4ef);
+      color: #542337;
+      padding: 25px 15px;
+    }
 
-.wrap{
-  max-width:1100px;
-  margin:auto;
-  padding:25px;
-}
+    .container {
+      width: 100%;
+      max-width: 1100px;
+      margin: auto;
+    }
 
-.box{
-  background:#fff;
-  padding:20px;
-  border-radius:20px;
-  box-shadow:0 10px 35px #a52f6118;
-  margin-bottom:18px;
-}
+    .card {
+      background: rgba(255,255,255,.92);
+      border: 1px solid rgba(255,255,255,.8);
+      border-radius: 28px;
+      box-shadow: 0 15px 45px rgba(150, 50, 90, .13);
+      padding: 25px;
+      margin-bottom: 20px;
+    }
 
-input,button{
-  padding:12px;
-  border-radius:10px;
-  font:15px Arial;
-}
+    .login-box {
+      max-width: 450px;
+      margin: 70px auto;
+      text-align: center;
+    }
 
-input{
-  border:2px solid #ffd0e1;
-  width:100%;
-  box-sizing:border-box;
-  margin-bottom:10px;
-}
+    h1, h2, h3 {
+      margin-top: 0;
+    }
 
-button{
-  border:0;
-  background:#df3e7d;
-  color:#fff;
-  font-weight:bold;
-  cursor:pointer;
-  margin-left:8px;
-}
+    h1 {
+      font-size: 28px;
+      color: #d6336c;
+    }
 
-.secondary{
-  background:#9b6480;
-}
+    h2 {
+      font-size: 21px;
+      color: #b52c5b;
+    }
 
-.hide{
-  display:none!important;
-}
+    .heart {
+      font-size: 45px;
+      margin-bottom: 5px;
+    }
 
-.table{
-  overflow:auto;
-}
+    input {
+      width: 100%;
+      padding: 15px;
+      margin: 8px 0;
+      border-radius: 15px;
+      border: 1px solid #f0bfd1;
+      background: #fff9fb;
+      font-family: inherit;
+      font-size: 15px;
+      outline: none;
+    }
 
-table{
-  width:100%;
-  border-collapse:collapse;
-  min-width:900px;
-}
+    input:focus {
+      border-color: #e75480;
+      box-shadow: 0 0 0 3px rgba(231,84,128,.1);
+    }
 
-th,td{
-  padding:10px;
-  border-bottom:1px solid #f2d8e3;
-  text-align:right;
-}
+    button {
+      border: 0;
+      border-radius: 15px;
+      padding: 13px 20px;
+      font-family: inherit;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: .2s;
+    }
 
-th{
-  background:#fff3f8;
-}
+    button:hover {
+      transform: translateY(-1px);
+    }
 
-.muted{
-  opacity:.7;
-  font-size:13px;
-}
+    .primary {
+      background: linear-gradient(135deg, #e75480, #c92f62);
+      color: white;
+      width: 100%;
+      margin-top: 10px;
+    }
 
-.actions{
-  display:flex;
-  gap:8px;
-  flex-wrap:wrap;
-}
+    .refresh {
+      background: #ffe1ec;
+      color: #a72755;
+    }
 
-.error{
-  color:#b42318;
-}
+    .logout {
+      background: #f3f3f3;
+      color: #555;
+    }
 
-.success{
-  color:#147a4b;
-}
+    .danger {
+      background: #ffe0e5;
+      color: #c62845;
+    }
 
-</style>
+    .danger-all {
+      background: #c62845;
+      color: white;
+    }
 
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .top-actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .message {
+      padding: 12px 15px;
+      border-radius: 14px;
+      margin-top: 12px;
+      display: none;
+      font-size: 14px;
+    }
+
+    .error {
+      background: #ffe3e8;
+      color: #a51d36;
+    }
+
+    .success {
+      background: #e4f8ea;
+      color: #23733c;
+    }
+
+    .loading {
+      text-align: center;
+      padding: 30px;
+      color: #a75a73;
+    }
+
+    .empty {
+      text-align: center;
+      padding: 50px 20px;
+      color: #a75a73;
+    }
+
+    .empty .emoji {
+      font-size: 45px;
+      margin-bottom: 10px;
+    }
+
+    .response {
+      border: 1px solid #f3d2df;
+      border-radius: 22px;
+      padding: 20px;
+      margin-top: 15px;
+      background: linear-gradient(135deg, #fffafd, #fff4f8);
+    }
+
+    .response-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 15px;
+      flex-wrap: wrap;
+    }
+
+    .response-number {
+      background: #ffe0ec;
+      color: #b52c5b;
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-weight: 700;
+      font-size: 13px;
+    }
+
+    .delete-btn {
+      background: #ffe1e5;
+      color: #c62845;
+      padding: 8px 14px;
+      font-size: 13px;
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+
+    .info {
+      background: white;
+      border-radius: 15px;
+      padding: 13px;
+      border: 1px solid #f7e0e8;
+    }
+
+    .label {
+      color: #a96b7f;
+      font-size: 12px;
+      margin-bottom: 4px;
+    }
+
+    .value {
+      font-weight: 700;
+      color: #542337;
+      word-break: break-word;
+    }
+
+    .flower {
+      color: #d04d77;
+    }
+
+    .danger-zone {
+      border: 1px solid #ffcbd3;
+      background: #fff7f8;
+    }
+
+    .danger-zone p {
+      color: #8d5262;
+      font-size: 13px;
+      margin-top: 0;
+    }
+
+    @media (max-width: 650px) {
+      body {
+        padding: 15px 10px;
+      }
+
+      .card {
+        padding: 18px;
+        border-radius: 22px;
+      }
+
+      h1 {
+        font-size: 23px;
+      }
+
+      .info-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .topbar {
+        align-items: stretch;
+      }
+
+      .top-actions {
+        width: 100%;
+      }
+
+      .top-actions button {
+        flex: 1;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-<div class="wrap">
+  <!-- LOGIN -->
+  <div id="loginPage" class="container">
 
-<h1>
-  پنل خصوصی نتایج ستایش ❤️
-</h1>
+    <div class="card login-box">
 
+      <div class="heart">🔐❤️</div>
 
-<!-- LOGIN -->
+      <h1>پنل خصوصی نتایج ستایش</h1>
 
-<div class="box" id="login">
+      <p>
+        فقط خودت می‌تونی پاسخ‌ها رو ببینی.
+      </p>
 
-<h3>
-  ورود مدیر 🔐
-</h3>
+      <input
+        id="email"
+        type="email"
+        placeholder="ایمیل مدیر"
+        autocomplete="username"
+      >
 
-<input
-  id="email"
-  type="email"
-  autocomplete="username"
-  placeholder="ایمیل"
->
+      <input
+        id="password"
+        type="password"
+        placeholder="رمز عبور"
+        autocomplete="current-password"
+      >
 
-<input
-  id="password"
-  type="password"
-  autocomplete="current-password"
-  placeholder="رمز عبور"
->
+      <button class="primary" onclick="login()">
+        ورود به پنل 🔑
+      </button>
 
-<button onclick="login()">
-  ورود
-</button>
+      <div id="loginMessage" class="message error"></div>
 
-<p class="muted">
-  فقط حسابی که در Supabase به‌عنوان
-  ادمین ثبت شده می‌تواند پاسخ‌ها را ببیند.
-</p>
+    </div>
 
-<p id="msg"></p>
-
-</div>
+  </div>
 
 
-<!-- PANEL -->
+  <!-- ADMIN -->
+  <div id="adminPage" class="container" style="display:none;">
 
-<div id="panel" class="hide">
+    <div class="card">
 
-<div class="box">
+      <div class="topbar">
 
-<div class="actions">
+        <div>
+          <h1>پاسخ‌های ستایش ❤️</h1>
+          <p style="margin:0;color:#9b6476;">
+            پاسخ‌هایی که از فرم دریافت شده‌اند
+          </p>
+        </div>
 
-<button onclick="load()">
-  به‌روزرسانی 🔄
-</button>
+        <div class="top-actions">
 
-<button
-  class="secondary"
-  onclick="logout()"
->
-  خروج
-</button>
+          <button class="refresh" onclick="loadResponses()">
+            🔄 بروزرسانی
+          </button>
 
-</div>
+          <button class="logout" onclick="logout()">
+            🚪 خروج
+          </button>
 
-<p id="status"></p>
+        </div>
 
-</div>
+      </div>
 
-
-<div class="box table">
-
-<table>
-
-<thead>
-
-<tr>
-
-<th>ثبت</th>
-
-<th>موبایل</th>
-
-<th>تاریخ</th>
-
-<th>ساعت</th>
-
-<th>آهنگ</th>
-
-<th>غذا</th>
-
-<th>هیجان</th>
-
-</tr>
-
-</thead>
-
-<tbody id="rows"></tbody>
-
-</table>
-
-</div>
-
-</div>
-
-</div>
+    </div>
 
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <!-- DANGER ZONE -->
+
+    <div class="card danger-zone">
+
+      <h2>⚠️ مدیریت پاسخ‌ها</h2>
+
+      <p>
+        حذف پاسخ‌ها دائمی است و بعد از حذف، از دیتابیس قابل بازیابی نیست.
+      </p>
+
+      <button class="danger-all" onclick="deleteAllResponses()">
+        🗑️ حذف همه پاسخ‌ها
+      </button>
+
+      <div id="actionMessage" class="message"></div>
+
+    </div>
+
+
+    <!-- RESPONSES -->
+
+    <div class="card">
+
+      <h2>💌 پاسخ‌ها</h2>
+
+      <div id="responses">
+        <div class="loading">
+          در حال دریافت پاسخ‌ها... 💗
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
 
 <script>
 
+  const SUPABASE_URL =
+    "https://jhbumkqemvvsjiyqiith.supabase.co";
 
-const SUPABASE_URL =
-"https://jhbumkqemvvsjiyqiith.supabase.co";
+  const SUPABASE_KEY =
+    "sb_publishable_UPr3S7SXyJOuvYggJ6iA2Q_wF_b_Qkc";
 
-
-const SUPABASE_KEY =
-"sb_publishable_UPr3S7SXyJOuvYggJ6iA2Q_wF_b_Qkc";
-
-
-const db =
-window.supabase.createClient(
-  SUPABASE_URL,
-  SUPABASE_KEY
-);
+  const db = supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+  );
 
 
-const loginBox =
-document.getElementById("login");
+  /* -------------------------
+     LOGIN
+  ------------------------- */
 
-const panel =
-document.getElementById("panel");
+  async function login() {
 
-const email =
-document.getElementById("email");
+    const email =
+      document.getElementById("email").value.trim();
 
-const password =
-document.getElementById("password");
+    const password =
+      document.getElementById("password").value;
 
-const msg =
-document.getElementById("msg");
-
-const status =
-document.getElementById("status");
-
-const rows =
-document.getElementById("rows");
+    const message =
+      document.getElementById("loginMessage");
 
 
-/* =========================
-   LOGIN
-========================= */
-
-async function login(){
-
-  msg.className = "";
-
-  msg.textContent =
-    "در حال ورود...";
+    message.style.display = "none";
 
 
-  const result =
-    await db.auth.signInWithPassword({
+    if (!email || !password) {
 
-      email:
-        email.value.trim(),
+      showMessage(
+        message,
+        "لطفاً ایمیل و رمز عبور را وارد کن.",
+        "error"
+      );
 
-      password:
-        password.value
-
-    });
+      return;
+    }
 
 
-  if(result.error){
+    const { error } =
+      await db.auth.signInWithPassword({
+        email,
+        password
+      });
 
-    msg.className =
-      "error";
 
-    msg.textContent =
-      "ورود ناموفق بود: " +
-      result.error.message;
+    if (error) {
 
-    return;
+      console.error(error);
+
+      showMessage(
+        message,
+        "ورود ناموفق بود. ایمیل یا رمز عبور را بررسی کن.",
+        "error"
+      );
+
+      return;
+    }
+
+
+    await checkSession();
 
   }
 
 
-  loginBox
-    .classList
-    .add("hide");
+  /* -------------------------
+     SESSION
+  ------------------------- */
 
-  panel
-    .classList
-    .remove("hide");
+  async function checkSession() {
 
-
-  await load();
-
-}
+    const {
+      data: { session }
+    } = await db.auth.getSession();
 
 
-/* =========================
-   LOAD
-========================= */
+    if (!session) {
 
-async function load(){
+      showLogin();
 
-  status.className =
-    "";
-
-  status.textContent =
-    "در حال دریافت پاسخ‌ها...";
+      return;
+    }
 
 
-  const result =
-    await db
-      .from("date_responses")
-      .select("*")
-      .order(
-        "created_at",
-        {
-          ascending:false
-        }
+    /*
+      بررسی می‌کنیم کاربر واقعاً
+      در admin_users وجود دارد.
+    */
+
+    const { data: admin, error } =
+      await db
+        .from("admin_users")
+        .select("user_id")
+        .eq("user_id", session.user.id)
+        .maybeSingle();
+
+
+    if (error || !admin) {
+
+      await db.auth.signOut();
+
+      showLogin();
+
+      const message =
+        document.getElementById("loginMessage");
+
+      showMessage(
+        message,
+        "این حساب دسترسی مدیر ندارد.",
+        "error"
+      );
+
+      return;
+    }
+
+
+    showAdmin();
+
+    loadResponses();
+
+  }
+
+
+  /* -------------------------
+     SHOW / HIDE
+  ------------------------- */
+
+  function showLogin() {
+
+    document.getElementById("loginPage")
+      .style.display = "block";
+
+    document.getElementById("adminPage")
+      .style.display = "none";
+
+  }
+
+
+  function showAdmin() {
+
+    document.getElementById("loginPage")
+      .style.display = "none";
+
+    document.getElementById("adminPage")
+      .style.display = "block";
+
+  }
+
+
+  /* -------------------------
+     LOAD RESPONSES
+  ------------------------- */
+
+  async function loadResponses() {
+
+    const box =
+      document.getElementById("responses");
+
+    box.innerHTML =
+      `<div class="loading">
+        در حال دریافت پاسخ‌ها... 💗
+      </div>`;
+
+
+    const { data, error } =
+      await db
+        .from("date_responses")
+        .select("*")
+        .order("created_at", {
+          ascending: false
+        });
+
+
+    if (error) {
+
+      console.error(error);
+
+      box.innerHTML =
+        `<div class="message error" style="display:block;">
+          دریافت پاسخ‌ها ناموفق بود.
+          <br>
+          ${escapeHtml(error.message)}
+        </div>`;
+
+      return;
+    }
+
+
+    if (!data || data.length === 0) {
+
+      box.innerHTML =
+        `<div class="empty">
+
+          <div class="emoji">💌</div>
+
+          <h3>هنوز پاسخی ثبت نشده</h3>
+
+          <p>
+            وقتی ستایش فرم رو پر کنه،
+            پاسخ اینجا نمایش داده می‌شه.
+          </p>
+
+        </div>`;
+
+      return;
+    }
+
+
+    box.innerHTML =
+      data.map((item, index) =>
+        createResponseHTML(item, index)
+      ).join("");
+
+  }
+
+
+  /* -------------------------
+     RESPONSE CARD
+  ------------------------- */
+
+  function createResponseHTML(item, index) {
+
+    const phone =
+      item.phone || "ثبت نشده";
+
+    const date =
+      item.date || "ثبت نشده";
+
+    const time =
+      item.time || "ثبت نشده";
+
+    const song =
+      item.song || "ثبت نشده";
+
+    const food =
+      item.food || "ثبت نشده";
+
+    const flower =
+      item.flower || "ثبت نشده";
+
+    const excitement =
+      item.excitement !== null &&
+      item.excitement !== undefined
+        ? item.excitement + " / 10"
+        : "ثبت نشده";
+
+
+    const created =
+      item.created_at
+        ? formatDate(item.created_at)
+        : "نامشخص";
+
+
+    return `
+
+      <div class="response">
+
+        <div class="response-head">
+
+          <span class="response-number">
+            پاسخ شماره ${index + 1}
+          </span>
+
+          <button
+            class="delete-btn"
+            onclick="deleteResponse('${escapeAttribute(item.id)}')"
+          >
+            🗑️ حذف این پاسخ
+          </button>
+
+        </div>
+
+
+        <div class="info-grid">
+
+
+          <div class="info">
+            <div class="label">📱 شماره موبایل</div>
+            <div class="value">
+              ${escapeHtml(phone)}
+            </div>
+          </div>
+
+
+          <div class="info">
+            <div class="label">📅 تاریخ دیت</div>
+            <div class="value">
+              ${escapeHtml(date)}
+            </div>
+          </div>
+
+
+          <div class="info">
+            <div class="label">⏰ ساعت</div>
+            <div class="value">
+              ${escapeHtml(time)}
+            </div>
+          </div>
+
+
+          <div class="info">
+            <div class="label">🎵 آهنگ</div>
+            <div class="value">
+              ${escapeHtml(song)}
+            </div>
+          </div>
+
+
+          <div class="info">
+            <div class="label">🍕 غذا</div>
+            <div class="value">
+              ${escapeHtml(food)}
+            </div>
+          </div>
+
+
+          <div class="info">
+            <div class="label">🌸 گل</div>
+            <div class="value flower">
+              ${escapeHtml(flower)}
+            </div>
+          </div>
+
+
+          <div class="info">
+            <div class="label">😍 میزان هیجان</div>
+            <div class="value">
+              ${escapeHtml(excitement)}
+            </div>
+          </div>
+
+
+          <div class="info">
+            <div class="label">🕐 زمان ثبت</div>
+            <div class="value">
+              ${escapeHtml(created)}
+            </div>
+          </div>
+
+
+        </div>
+
+      </div>
+
+    `;
+
+  }
+
+
+  /* -------------------------
+     DELETE ONE
+  ------------------------- */
+
+  async function deleteResponse(id) {
+
+    if (!id) {
+
+      alert("شناسه پاسخ پیدا نشد.");
+
+      return;
+    }
+
+
+    const confirmed =
+      confirm(
+        "مطمئنی می‌خوای این پاسخ رو پاک کنی؟\n\nاین کار قابل برگشت نیست."
       );
 
 
-  if(result.error){
+    if (!confirmed) return;
 
-    console.error(
-      result.error
+
+    const { error } =
+      await db
+        .from("date_responses")
+        .delete()
+        .eq("id", id);
+
+
+    if (error) {
+
+      console.error(error);
+
+      alert(
+        "حذف انجام نشد.\n\n" +
+        error.message
+      );
+
+      return;
+    }
+
+
+    showActionMessage(
+      "پاسخ با موفقیت حذف شد. 🗑️",
+      "success"
     );
 
-    status.className =
-      "error";
 
-    status.textContent =
-      "دسترسی رد شد: " +
-      result.error.message;
-
-    return;
+    await loadResponses();
 
   }
 
 
-  if(!result.data.length){
+  /* -------------------------
+     DELETE ALL
+  ------------------------- */
 
-    rows.innerHTML = "";
+  async function deleteAllResponses() {
 
-    status.className =
-      "success";
+    const firstConfirm =
+      confirm(
+        "⚠️ هشدار!\n\n" +
+        "آیا مطمئنی می‌خواهی همه پاسخ‌ها پاک شوند؟"
+      );
 
-    status.textContent =
-      "هنوز پاسخی ثبت نشده ❤️";
 
-    return;
+    if (!firstConfirm) return;
+
+
+    const secondConfirm =
+      confirm(
+        "این آخرین تأیید است.\n\n" +
+        "تمام پاسخ‌های دیتابیس حذف خواهند شد.\n\n" +
+        "واقعاً ادامه بدیم؟"
+      );
+
+
+    if (!secondConfirm) return;
+
+
+    /*
+      برای حذف همه، از یک شرط استفاده می‌کنیم
+      که تمام UUIDهای معتبر را شامل می‌شود.
+    */
+
+    const { error } =
+      await db
+        .from("date_responses")
+        .delete()
+        .not("id", "is", null);
+
+
+    if (error) {
+
+      console.error(error);
+
+      alert(
+        "حذف همه انجام نشد.\n\n" +
+        error.message
+      );
+
+      return;
+    }
+
+
+    showActionMessage(
+      "همه پاسخ‌ها با موفقیت پاک شدند. 🧹❤️",
+      "success"
+    );
+
+
+    await loadResponses();
 
   }
 
 
-  rows.innerHTML =
-    result.data
-      .map(function(x){
+  /* -------------------------
+     LOGOUT
+  ------------------------- */
 
-        return `
+  async function logout() {
 
-<tr>
+    await db.auth.signOut();
 
-<td>
-${escapeHtml(
-  new Date(x.created_at)
-    .toLocaleString("fa-IR")
-)}
-</td>
+    showLogin();
 
-<td>
-${escapeHtml(x.phone)}
-</td>
-
-<td>
-${escapeHtml(x.date)}
-</td>
-
-<td>
-${escapeHtml(x.time)}
-</td>
-
-<td>
-${escapeHtml(x.song)}
-</td>
-
-<td>
-${escapeHtml(x.food)}
-</td>
-
-<td>
-${escapeHtml(x.excitement)}%
-</td>
-
-</tr>
-
-`;
-
-      })
-      .join("");
+  }
 
 
-  status.className =
-    "success";
+  /* -------------------------
+     MESSAGE
+  ------------------------- */
 
-  status.textContent =
-    result.data.length +
-    " پاسخ پیدا شد ❤️";
+  function showActionMessage(text, type) {
 
-}
+    const box =
+      document.getElementById("actionMessage");
 
+    showMessage(box, text, type);
 
-/* =========================
-   LOGOUT
-========================= */
-
-async function logout(){
-
-  await db.auth.signOut();
-
-  panel.classList.add("hide");
-
-  loginBox.classList.remove("hide");
-
-  password.value = "";
-
-  msg.textContent = "";
-
-}
+  }
 
 
-/* =========================
-   ESCAPE
-========================= */
+  function showMessage(box, text, type) {
 
-function escapeHtml(value){
+    box.textContent = text;
 
-  return String(
-    value ?? ""
-  ).replace(
-    /[&<>"']/g,
-    function(c){
+    box.className =
+      "message " +
+      (type === "success"
+        ? "success"
+        : "error");
 
-      return {
+    box.style.display = "block";
 
-        "&":"&amp;",
-        "<":"&lt;",
-        ">":"&gt;",
-        '"':"&quot;",
-        "'":"&#039;"
+  }
 
-      }[c];
+
+  /* -------------------------
+     FORMAT DATE
+  ------------------------- */
+
+  function formatDate(dateString) {
+
+    try {
+
+      const date =
+        new Date(dateString);
+
+      return date.toLocaleString(
+        "fa-IR",
+        {
+          dateStyle: "medium",
+          timeStyle: "short"
+        }
+      );
+
+    } catch (e) {
+
+      return dateString;
 
     }
-  );
-
-}
-
-
-/* =========================
-   SESSION
-========================= */
-
-async function init(){
-
-  const result =
-    await db.auth.getSession();
-
-
-  if(result.data.session){
-
-    loginBox
-      .classList
-      .add("hide");
-
-    panel
-      .classList
-      .remove("hide");
-
-    await load();
 
   }
 
-}
+
+  /* -------------------------
+     SECURITY HELPERS
+  ------------------------- */
+
+  function escapeHtml(value) {
+
+    return String(value)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
+
+  }
 
 
-init();
+  function escapeAttribute(value) {
+
+    return String(value)
+      .replace(/\\/g, "\\\\")
+      .replace(/'/g, "\\'");
+
+  }
+
+
+  /* -------------------------
+     ENTER KEY LOGIN
+  ------------------------- */
+
+  document
+    .getElementById("password")
+    .addEventListener(
+      "keydown",
+      function(event) {
+
+        if (event.key === "Enter") {
+          login();
+        }
+
+      }
+    );
+
+
+  /* -------------------------
+     INITIAL CHECK
+  ------------------------- */
+
+  checkSession();
 
 </script>
 
 </body>
 </html>
+
+
